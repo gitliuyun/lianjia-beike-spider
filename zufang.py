@@ -5,8 +5,9 @@
 # 获得指定城市的出租房数据
 
 from lib.spider.zufang_spider import *
+from lib.spider.zufang_spider_5i5j import ZuFangBaseSpiderWiWj
 
 if __name__ == "__main__":
-    spider = ZuFangBaseSpider(SPIDER_NAME)
+    spider = ZuFangBaseSpiderWiWj(SPIDER_NAME)
     spider.start()
 

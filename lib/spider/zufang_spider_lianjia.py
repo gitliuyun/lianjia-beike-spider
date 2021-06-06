@@ -17,7 +17,7 @@ import lib.utility.version
 import pymysql
 
 
-class ZuFangBaseSpider(BaseSpider):
+class ZuFangBaseSpiderLianjia(BaseSpider):
     def collect_area_zufang_data(self, city_name, area_name, fmt="csv"):
         """
         对于每个板块,获得这个板块下所有出租房的信息
@@ -71,10 +71,10 @@ class ZuFangBaseSpider(BaseSpider):
 
         # 获得总的页数
         try:
-            if SPIDER_NAME == "lianjia":
+            if SPIDER_NAME == "ke":
                 page_box = soup.find_all('div', class_='page-box')[0]
                 matches = re.search('.*"totalPage":(\d+),.*', str(page_box))
-            elif SPIDER_NAME == "ke":
+            elif SPIDER_NAME == "lianjia":
                 page_box = soup.find_all('div', class_='content__pg')[0]
                 # print(page_box)
                 matches = re.search('.*data-totalpage="(\d+)".*', str(page_box))
@@ -95,7 +95,7 @@ class ZuFangBaseSpider(BaseSpider):
             soup = BeautifulSoup(html, "lxml")
 
             # 获得有小区信息的panel
-            if SPIDER_NAME == "lianjia":
+            if SPIDER_NAME == "ke":
                 ul_element = soup.find('ul', class_="house-lst")
                 house_elements = ul_element.find_all('li')
             else:
@@ -108,7 +108,7 @@ class ZuFangBaseSpider(BaseSpider):
             #     print(len(house_elements))
 
             for house_elem in house_elements:
-                if SPIDER_NAME == "lianjia":
+                if SPIDER_NAME == "ke":
                     price = house_elem.find('span', class_="num")
                     xiaoqu = house_elem.find('span', class_='region')
                     layout = house_elem.find('span', class_="zone")
@@ -119,7 +119,7 @@ class ZuFangBaseSpider(BaseSpider):
                     desc2 = house_elem.find('p', class_="content__list--item--des")
 
                 try:
-                    if SPIDER_NAME == "lianjia":
+                    if SPIDER_NAME == "ke":
                         price = price.text.strip()
                         xiaoqu = xiaoqu.text.strip().replace("\n", "")
                         layout = layout.text.strip()
@@ -197,5 +197,5 @@ class ZuFangBaseSpider(BaseSpider):
 
 
 if __name__ == '__main__':
-    # get_area_zufang_info("yt", "muping")
+    #self.collect_area_zufang_data("bj", "andingmen", fmt="csv")
     pass

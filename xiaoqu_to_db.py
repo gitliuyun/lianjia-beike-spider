@@ -39,7 +39,7 @@ if __name__ == '__main__':
     # database = "mongodb"
     # database = "excel"
     # database = "json"
-    database = "csv"
+    database = "mysql"
     ##################################
     db = None
     collection = None

@@ -6,7 +6,7 @@
 # 爬虫名常量，用来设置爬取哪个站点
 
 import threading
-from lib.zone.city import lianjia_cities, beike_cities
+from lib.zone.city import lianjia_cities, beike_cities, wiwj_cities
 from lib.utility.date import *
 import lib.utility.version
 import random
@@ -16,11 +16,12 @@ thread_pool_size = 50
 # 防止爬虫被禁，随机延迟设定
 # 如果不想delay，就设定False，
 # 具体时间可以修改random_delay()，由于多线程，建议数值大于10
-RANDOM_DELAY = False
+RANDOM_DELAY = True
 LIANJIA_SPIDER = "lianjia"
 BEIKE_SPIDER = "ke"
-# SPIDER_NAME = LIANJIA_SPIDER
-SPIDER_NAME = BEIKE_SPIDER
+WIWJ_SPIDER = "5i5j"
+#SPIDER_NAME = LIANJIA_SPIDER
+SPIDER_NAME = WIWJ_SPIDER
 
 
 class BaseSpider(object):
@@ -35,6 +36,8 @@ class BaseSpider(object):
             self.cities = lianjia_cities
         elif self.name == BEIKE_SPIDER:
             self.cities = beike_cities
+        elif self.name == WIWJ_SPIDER:
+            self.cities = wiwj_cities
         else:
             self.cities = None
         # 准备日期信息，爬到的数据存放到日期相关文件夹下
